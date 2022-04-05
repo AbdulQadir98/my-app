@@ -4,6 +4,7 @@ class Counter extends Component {
   // properties are defined in state object
   state = {
     count: 0,
+    tags: ["list1", "list2", "list3"],
   };
 
   // render method
@@ -12,13 +13,26 @@ class Counter extends Component {
       <React.Fragment>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button className="btn btn-secondary btn-sm">Increment</button>
+        {this.renderList()}
       </React.Fragment>
     );
   }
 
+  // to render a list use map method
+  renderList() {
+    if (this.state.tags.length === 0) return <p>No list!</p>;
+    return (
+      <ul>
+        {this.state.tags.map((tag) => (
+          <li key={tag}>{tag}</li>
+        ))}
+      </ul>
+    );
+  }
+
   getBadgeClasses() {
-    let classes = "badge m-2 badge-";
-    classes += this.state === 0 ? "warning" : "primary"; // appening strings to bootstrap classes
+    let classes = "btn btn-sm m-2 btn-";
+    classes += this.state.count === 0 ? "warning" : "primary"; // appending strings to bootstrap classes
     return classes;
   }
 
