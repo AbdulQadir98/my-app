@@ -3,8 +3,12 @@ import React, { Component } from "react";
 class Counter extends Component {
   // properties are defined in state object
   state = {
-    count: 0,
+    count: this.props.value,
     tags: ["list1", "list2", "list3"],
+  };
+
+  handleIncrement = () => {
+    this.setState({ count: this.state.count + 1 });
   };
 
   // render method
@@ -12,8 +16,13 @@ class Counter extends Component {
     return (
       <React.Fragment>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <button className="btn btn-secondary btn-sm">Increment</button>
-        {this.renderList()}
+        <button
+          onClick={() => this.handleIncrement()}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
+        {/* {this.renderList()} */}
       </React.Fragment>
     );
   }
